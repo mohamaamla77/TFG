@@ -1,0 +1,42 @@
+🔹 Resumen de tu entorno práctico en VirtualBox + móvil:
+
+Máquina 1 – Ubuntu Server (Servidor principal):
+
+Conectada a la LAN (red interna con pfSense).
+
+Servicios: Nginx (web) y WireGuard (VPN).
+
+Máquina 2 – Empleado 1 (Ubuntu Desktop):
+
+Cliente interno.
+
+Conectado a la LAN (red interna con pfSense).
+
+Accede directamente al servidor web sin necesidad de VPN.
+
+Máquina 3 – Empleado 2 (Ubuntu Desktop):
+
+Cliente externo.
+
+Conectado mediante adaptador puente (red pública).
+
+Se conecta a la VPN (WireGuard) para entrar en la LAN y acceder al servidor web.
+
+Máquina 4 – Empleado 3 (Móvil):
+
+Cliente externo.
+
+Conectado vía WireGuard app en el móvil.
+
+Accede de forma segura al servidor web interno.
+
+Router/Firewall – pfSense:
+
+WAN (adaptador puente) con IP pública/192.168.1.x.
+
+LAN (red interna) con 192.168.50.x.
+
+Hace NAT + firewall + permite acceso VPN hacia Ubuntu Server.
+
+Así tendrás un entorno empresarial simulado:
+LAN con un servidor de servicios internos (nginx) y usuarios internos (empleado 1), y empleados externos (empleado 2 y 3) que se conectan solo a través de la VPN (WireGuard) para llegar al servidor.

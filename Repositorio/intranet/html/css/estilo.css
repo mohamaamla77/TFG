@@ -1,0 +1,153 @@
+/*
+ * css/estilo.css
+ * Hoja de estilos principal de la intranet TEcnycom.
+ */
+
+/* --- 1. ESTILOS GLOBALES --- */
+/* Afectan a toda la página */
+
+body {
+    font-family: Arial, sans-serif; /* El tipo de letra para toda la web */
+    margin: 0; /* Quita el margen por defecto del navegador */
+    padding: 0; /* Quita el relleno por defecto */
+    background: #f4f7f6; /* Un fondo gris muy claro para la página */
+    color: #333; /* Color de texto principal (gris oscuro) */
+}
+
+/*
+ * 'border-box' hace que el 'padding' (relleno) y el 'border' (borde)
+ * se cuenten *hacia dentro* del ancho (width), no hacia fuera.
+ * Esto hace que las cajas de 100% de ancho no se desborden.
+ */
+* {
+    box-sizing: border-box;
+}
+
+
+/* --- 2. MAQUETACIÓN Y ESTRUCTURA --- */
+/* Define las "cajas" principales de la web */
+
+/*
+/* La cabecera (arriba) y el pie de página (abajo) */
+/* He añadido bordes redondeados y sombra */
+header, footer {
+    background: #004080; /* Fondo azul oscuro corporativo */
+    color: white; /* Texto blanco */
+    padding: 20px; /* Relleno interior (más espaciado) */
+    margin: 20px; /* Margen exterior (para separarlo de los bordes) */
+    border-radius: 8px; /* ¡NUEVO! Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.1); /* ¡NUEVO! Sombra sutil */
+}
+
+/* El logo (imagen) dentro de la cabecera */
+header img {
+    height: 40px; /* Altura fija */
+    vertical-align: middle; /* Se alinea con el texto del <h1> */
+    margin-right: 10px; /* Espacio a la derecha */
+}
+
+/*
+ * La etiqueta <section> la usamos para todas las "cajas"
+ * de contenido (Quiénes somos, Noticias, Formularios).
+ */
+section {
+    background: #ffffff; /* Fondo blanco para el contenido */
+    padding: 20px; /* Relleno interior */
+    margin: 20px; /* Margen exterior (igual que header/footer) */
+    border-radius: 8px; /* ¡NUEVO! Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.05); /* ¡NUEVO! Sombra muy sutil */
+}
+
+
+/* --- 3. TIPOGRAFÍA Y ENLACES --- */
+/* Estilos para el texto */
+
+/* Títulos principales */
+h1, h2 {
+    color: #004080; /* Color azul corporativo */
+    border-bottom: 2px solid #f0f0f0; /* ¡NUEVO! Línea de separación sutil */
+    padding-bottom: 10px; /* Espacio entre el título y la línea */
+}
+
+/* Enlaces del menú de navegación */
+nav a {
+    color: white; /* Texto blanco */
+    text-decoration: none; /* Quita el subrayado */
+    margin-right: 15px;
+    font-weight: bold; /* ¡NUEVO! Letra en negrita */
+}
+
+/* Efecto al pasar el ratón por el menú */
+nav a:hover {
+    text-decoration: underline; /* Vuelve a poner el subrayado */
+}
+
+
+/* --- 4. COMPONENTES (Tabla, Formularios) --- */
+/* Estilos para elementos específicos */
+
+/* Estilo de la tabla (Directorio de empleados) */
+table {
+    border-collapse: collapse; /* Bordes unidos */
+    width: 100%; /* Ancho completo */
+    background: white;
+    /* ¡NUEVO! Hacemos que la tabla tenga bordes redondeados */
+    border-radius: 8px;
+    overflow: hidden; /* Necesario para que el border-radius se vea */
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.05); /* Sombra sutil */
+}
+
+/* Celdas de la tabla (encabezado 'th' y datos 'td') */
+th, td {
+    border: 1px solid #ddd; /* Borde gris fino */
+    padding: 12px; /* Más relleno para que "respire" */
+    text-align: left; /* Alinea todo a la izquierda */
+}
+
+/* Encabezado de la tabla (fila <th>) */
+th {
+    background: #004080; /* Fondo azul */
+    color: white; /* Texto blanco */
+}
+
+/*
+ * (Esto afecta a login.php, solicitudes.php, dashboard.php, etc.)
+ */
+
+/* Estilo para las etiquetas (Nombre, Email, etc.) */
+label {
+    font-weight: bold; /* Letra en negrita */
+    display: block; /* Ocupa una línea entera */
+    margin-bottom: 5px; /* Pequeño espacio inferior */
+}
+
+/* Estilo para los campos de texto, email, contraseña, menús y áreas de texto */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    width: 90%; /* Ocupa el 90% del ancho de la sección */
+    max-width: 500px; /* Pero como mucho, 500px */
+    padding: 10px; /* Relleno interior */
+    margin-bottom: 15px; /* Espacio inferior */
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Estilo para el botón de "Enviar" */
+input[type="submit"] {
+    background-color: #004080; /* Fondo azul */
+    color: white; /* Texto blanco */
+    padding: 12px 20px; /* Relleno (más grande) */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Muestra una "mano" al pasar por encima */
+    font-size: 1em; /* Tamaño de letra */
+    font-weight: bold; /* Negrita */
+}
+
+/* Efecto al pasar el ratón por el botón */
+input[type="submit"]:hover {
+    background-color: #0059b3; /* Un azul un poco más claro */
+}
