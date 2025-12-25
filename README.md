@@ -28,6 +28,7 @@ Para facilitar la revisión del proyecto, los archivos se han organizado de la s
 
 📂 backups/: Ejemplo de archivo de respaldo comprimido (.tar.gz) generado por el sistema.
 
-Autor: [Mohammed Maamla Razzak]
+Autor: Mohammed Maamla Razzak
 Fecha: 25 Diciembre 2025
+
 Este proyecto ha sido desarrollado como parte del Trabajo de Fin de Grado en CPIFP Los Enlaces (Zaragoza).
