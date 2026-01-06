@@ -2,27 +2,19 @@
 /*
  * validar_login.php (Script de Lógica de Autenticación)
  *
- * Este script NO es una página web que se ve. Es un "backend".
+ * Este script NO es una página web que se ve. Es un script.
  * Su único trabajo es:
  * 1. Iniciar el motor de sesiones de PHP.
  * 2. Simular una base de datos con usuarios y contraseñas válidos.
  * 3. Recoger los datos (usuario/clave) que el usuario escribió en 'login.php'.
  * 4. Comprobar si el usuario y la clave son correctos.
- * 5. Si SÍ son correctos:
- * a. "Recordar" al usuario guardando sus datos en la $_SESSION.
- * b. Redirigir al usuario al 'dashboard.php'.
- * 6. Si NO son correctos:
- * a. Redirigir al usuario de vuelta a 'login.php'.
  */
 
 // --- 1. INICIAR EL SISTEMA DE SESIONES ---
-// Es OBLIGATORIO llamar a session_start() al principio
-// de cualquier script que vaya a *escribir* o *leer*
-// la variable $_SESSION.
 session_start();
 
 // --- 2. SIMULACIÓN DE BASE DE DATOS (Usuarios Válidos) ---
-// En un proyecto real, esto sería una consulta a una base de datos MySQL/PostgreSQL.
+// Aquí se encuentran los usuarios de la empresa.
 $usuarios_validos = [
     // 'nombre_de_usuario' => 'contraseña'
     'admin' => 'admin',  // Este usuario tiene rol de Administrador
@@ -51,8 +43,6 @@ $clave_form = $_POST['clave'] ?? '';
 //   existe como "clave" en nuestro array de $usuarios_validos.
 //   (Evita errores si el usuario no existe)
 //
-// '&&' significa "Y ADEMÁS"
-//
 // '$usuarios_validos[$usuario_form] == $clave_form'
 //   Comprueba si la contraseña de ese usuario en nuestro array
 //   (ej. $usuarios_validos['admin'] que es 'admin')
@@ -70,8 +60,6 @@ if (isset($usuarios_validos[$usuario_form]) && $usuarios_validos[$usuario_form] 
     $_SESSION['usuario_logueado'] = $usuario_form;
     
     // Asignamos un "rol" (permiso) a este usuario en la sesión.
-    // Usamos un 'if' corto (ternario):
-    // (Condición) ? (Si es verdad) : (Si es falso)
     // "Si el usuario es 'admin', dale el rol 'admin', si no, dale 'empleado'"
     $_SESSION['rol'] = ($usuario_form == 'admin') ? 'admin' : 'empleado';
     

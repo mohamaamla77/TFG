@@ -2,7 +2,7 @@
 /*
  * subir_archivo.php
  *
- * Este script NO es una página web que se ve. Es un "backend".
+ * Este script NO es una página web que se ve. Es un script.
  * Su trabajo es:
  * 1. Recoger el archivo enviado desde el formulario de "Gestión de Documentos" (index.php).
  * 2. Validar que el tipo de archivo sea seguro (¡MUY IMPORTANTE!).
@@ -19,8 +19,8 @@ $mensaje_usuario = '';
 
 // --- 2. COMPROBAR LA SUBIDA INICIAL ---
 // Comprueba si se envió un archivo (name="archivo") Y
-// si el código de error es 0 (UPLOAD_ERR_OK), que significa "subido con éxito".
-if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
+// si el código de error es 0, que significa "subido con éxito".
+if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
     
     // --- 3. MEDIDA DE SEGURIDAD 1: VALIDAR EXTENSIÓN (Whitelist) ---
     // (Este paso faltaba en tu código original y es crítico)
@@ -40,7 +40,7 @@ if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) 
     if (in_array($extension, $extensiones_permitidas)) {
         
         // --- 4. MEDIDA DE SEGURIDAD 2: EVITAR SOBRESCRIBIR ARCHIVOS ---
-        // (Esto es una mejora. Tu código original borraba archivos si se llamaban igual)
+        // (Esto evita que el código borre archivos si se llaman igual)
         
         $nombre_base = pathinfo($nombre_original, PATHINFO_FILENAME); // "documento"
         $nombre_final = $nombre_original; // "documento.pdf"

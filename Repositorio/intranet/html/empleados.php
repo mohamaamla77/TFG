@@ -1,13 +1,6 @@
 <?php
 /*
  * empleados.php (Página de Directorio)
- *
- * Este archivo era 'empleados.html', pero se ha renombrado a '.php'.
- *
- * ¿POR QUÉ?
- * Para poder incluir el mismo menú dinámico que tiene 'index.php'.
- * Así, si el usuario ha iniciado sesión, verá aquí también
- * el botón de "Cerrar Sesión" y el enlace a "Área Administrativa".
  */
 
 // session_start() es necesario para poder leer la variable $_SESSION

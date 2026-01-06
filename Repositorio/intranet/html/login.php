@@ -1,13 +1,6 @@
 <?php
 /*
  * login.php (Página de Inicio de Sesión)
- *
- * Este archivo era 'login.html', pero se ha renombrado a '.php'.
- *
- * ¿POR QUÉ?
- * Para poder incluir el mismo menú dinámico que tiene 'index.php'.
- * Así, la cabecera es consistente. Si un usuario ya logueado
- * llega aquí, verá el botón de "Cerrar Sesión".
  */
 
 // session_start() es necesario para poder leer la variable $_SESSION

@@ -25,7 +25,6 @@ $mensaje = $_POST['mensaje'] ?? '';
 
 // --- 2. VALIDACIÓN BÁSICA DE TEXTO ---
 
-// 'if (!$nombre...)' es un atajo para "si $nombre está vacío O $email está vacío...".
 // Si falta algún campo obligatorio, muestra un error y detiene el script.
 if (!$nombre || !$email || !$tipo || !$mensaje) {
     echo "Faltan datos en el formulario. <a href='solicitudes.php'>Volver</a>";
@@ -39,23 +38,22 @@ if (!$nombre || !$email || !$tipo || !$mensaje) {
 $enlace_archivo = '';
 
 // '__DIR__' es una constante de PHP que significa "el directorio de este script"
-// (es decir, la carpeta raíz de tu proyecto).
-$ruta_subidas = __DIR__ . '/solicitudes/'; // La carpeta de destino (ej. /var/www/html/solicitudes/)
+$ruta_subidas = __DIR__ . '/solicitudes/'; // La carpeta de destino
 
 // '$_FILES' es otro array especial de PHP para los archivos subidos.
 // 'isset($_FILES['adjunto'])' -> Comprueba si se envió un archivo con name="adjunto".
 // '$_FILES['adjunto']['error'] == 0' -> Comprueba que la subida fue exitosa (código 0).
 if (isset($_FILES['adjunto']) && $_FILES['adjunto']['error'] == 0) {
     
-    // --- 3A. MEDIDA DE SEGURIDAD 1: VALIDAR TIPO DE ARCHIVO (Whitelist) ---
-    // NO confíes en el tipo de archivo que dice el navegador, confía en la extensión.
+    // --- 3A. MEDIDA DE SEGURIDAD 1: VALIDAR TIPO DE ARCHIVO ---
+    // NO se confía en el tipo de archivo que dice el navegador, se confía en la extensión.
     
     $nombre_original = $_FILES['adjunto']['name']; // ej. "mi_factura.pdf"
     
     // 'pathinfo' saca la extensión. 'strtolower' la pasa a minúsculas (PDF -> pdf).
     $extension = strtolower(pathinfo($nombre_original, PATHINFO_EXTENSION));
     
-    // Lista "blanca" (whitelist) de extensiones que SÍ permitimos.
+    // Lista blanca de extensiones que SÍ permitimos.
     // Esto es crucial para evitar que alguien suba un virus (ej. .exe) o
     // un script malicioso (ej. .php).
     $extensiones_permitidas = ['pdf', 'docx', 'jpg', 'jpeg', 'png', 'txt'];
@@ -75,21 +73,15 @@ if (isset($_FILES['adjunto']) && $_FILES['adjunto']['error'] == 0) {
         // el archivo desde la carpeta temporal de PHP (tmp_name) a nuestra carpeta de destino.
         if (move_uploaded_file($_FILES['adjunto']['tmp_name'], $ruta_destino)) {
             
-            // ¡ÉXITO! El archivo está en /solicitudes/. Ahora creamos el HTML.
+            // El archivo está en /solicitudes/. Ahora creamos el HTML.
             // 'htmlspecialchars()' es OTRA MEDIDA DE SEGURIDAD (XSS)
             // para los nombres de archivo.
             
-            // IMPORTANTE: El enlace <a> usa la ruta '../solicitudes/...'
-            // ¿Por qué? Porque este HTML se mostrará en 'admin/dashboard.php'.
-            // Desde esa carpeta, necesita "subir un nivel" (..) para
-            // encontrar la carpeta 'solicitudes' que está en la raíz.
             $enlace_archivo = "<br><b>Archivo adjunto:</b> <a href='../solicitudes/" . htmlspecialchars($nombre_seguro) . "' target='_blank'>" . htmlspecialchars($nombre_original) . "</a>";
         
         } else {
             // Error si 'move_uploaded_file' falla.
-            // Causa más común: La carpeta 'solicitudes' no tiene permisos de escritura.
-            // (Solución en Linux: sudo chmod 777 solicitudes)
-            echo "Error: No se pudo mover el archivo. Comprueba los permisos de la carpeta 'solicitudes'. <a href='solicitudes.php'>Volver</a>";
+            echo "Error: No se pudo mover el archivo. <a href='solicitudes.php'>Volver</a>";
             exit;
         }
     } else {
@@ -116,14 +108,13 @@ $entrada = "<p><strong>" . htmlspecialchars($nombre) . "</strong> (" . htmlspeci
 $archivo = __DIR__ . '/admin/solicitudes_guardadas.html';
 
 // 'file_get_contents()' lee el contenido antiguo del archivo
-// El '?' (operador ternario) es un if/else corto:
-// (condición) ? (si es verdad) : (si es falso)
+// El '?' es un if corto:
 // "Si el archivo existe, léelo; si no, usa '' (vacío)"
 $contenido_actual = file_exists($archivo) ? file_get_contents($archivo) : '';
 
 // 'file_put_contents()' escribe en el archivo.
-// Escribimos la $entrada NUEVA primero, y luego el $contenido_actual.
-// Esto hace que las solicitudes más nuevas aparezcan ARRIBA.
+// Escribimos la $entrada nueva primero, y luego el $contenido_actual.
+// Esto hace que las solicitudes más nuevas aparezcan arriba.
 file_put_contents($archivo, $entrada . $contenido_actual);
 
 // --- 6. MOSTRAR MENSAJE DE ÉXITO Y REDIRIGIR ---

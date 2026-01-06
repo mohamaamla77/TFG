@@ -3,14 +3,13 @@
  * index.php (Página Principal de la Intranet)
  *
  * Este archivo es la página de bienvenida.
- * Es un archivo .php porque necesita hacer tres cosas "dinámicas" (que cambian):
- * 1. Comprobar si el usuario ha iniciado sesión (para cambiar el menú).
+ * Es un archivo .php porque necesita hacer tres cosas dinámicas:
+ * 1. Comprobar si el usuario ha iniciado sesión.
  * 2. Cargar las noticias dinámicamente desde un archivo.
  * 3. Listar los archivos de la carpeta "Gestión de Documentos".
  */
 
-// session_start() DEBE ser la primera línea de PHP.
-// Inicia la sesión o reanuda una existente.
+// session_start inicia la sesión o reanuda una existente.
 // Esto nos permite usar la variable $_SESSION, que es como una memoria
 // que recuerda quién es el usuario entre las distintas páginas.
 session_start(); 
@@ -25,7 +24,7 @@ session_start();
     <!-- Enlace a la hoja de estilos CSS que define el diseño y los colores -->
     <link rel="stylesheet" href="css/estilo.css" />
     
-    <!-- Enlace al icono (favicon) que aparece en la pestaña del navegador -->
+    <!-- Enlace al icono que aparece en la pestaña del navegador -->
     <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
@@ -93,10 +92,9 @@ session_start();
                  */
                 
                 // '__DIR__' es una constante de PHP que significa "este mismo directorio".
-                // Es la forma más segura de construir una ruta de archivo.
                 $archivo_noticias = __DIR__ . '/admin/noticias_guardadas.html';
 
-                // 'file_exists()' comprueba si el archivo exist
+                // 'file_exists()' comprueba si el archivo existe
                 // 'filesize() > 0' comprueba que no esté vacío
                 if (file_exists($archivo_noticias) && filesize($archivo_noticias) > 0) {
                     
