@@ -2,7 +2,7 @@
 /*
  * admin/procesar_noticia.php (Script de Lógica de Noticias)
  *
- * Este script NO es una página web que se ve. Es un "backend".
+ * Este script no es una página web que se ve. Es un script.
  * Su único trabajo es:
  * 1. Recoger el texto de la noticia enviado desde 'dashboard.php'.
  * 2. Validar que el texto no esté vacío.
@@ -29,13 +29,6 @@ if (empty($noticia_texto)) {
 // 'date('d/m/Y')' obtiene la fecha actual (ej. "12/11/2025")
 $fecha = date('d/m/Y'); 
 
-// MEDIDA DE SEGURIDAD (XSS):
-// 'htmlspecialchars()' es crucial. Convierte caracteres especiales
-// (como '<' y '>') en texto normal. Evita que un admin
-// (o un atacante) pueda insertar código <script> malicioso.
-//
-// 'nl2br()' es para formato. Convierte los "Enter" (saltos de línea)
-// en etiquetas HTML <br> para que el texto se vea bien.
 $noticia_html = "<li><strong>" . $fecha . "</strong> - " . 
                 nl2br(htmlspecialchars($noticia_texto)) . "</li>\n";
 

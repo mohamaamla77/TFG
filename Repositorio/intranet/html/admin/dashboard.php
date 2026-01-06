@@ -11,14 +11,10 @@
  */
 
 // --- 1. INICIAR LA SESIÓN ---
-// OBLIGATORIO. 'session_start()' se conecta a la sesión
-// que 'validar_login.php' creó.
-// Debe ser lo PRIMERO en el archivo, antes de cualquier HTML.
 session_start();
 
 // --- 2. MEDIDA DE SEGURIDAD 1: ¿ESTÁ LOGUEADO? ---
-// 'isset' comprueba si la variable $_SESSION['usuario_logueado'] "existe".
-// Si NO existe (!isset), significa que el usuario no ha iniciado sesión.
+// 'isset' comprueba si la variable $_SESSION['usuario_logueado'] existe.
 if (!isset($_SESSION['usuario_logueado'])) {
     
     // Si no ha iniciado sesión, lo "expulsamos" a la página de login.
@@ -43,7 +39,7 @@ if ($_SESSION['rol'] != 'admin') {
     exit;
 }
 
-// --- SI EL SCRIPT LLEGA HASTA AQUÍ, SIGNIFICA QUE EL USUARIO ES UN ADMIN VÁLIDO ---
+// --- SI EL SCRIPT LLEGA HASTA AQUÍ, SIGNIFICA QUE EL USUARIO ES EL ADMIN ---
 // --- 4. LÓGICA DE MONITORIZACIÓN DEL SERVIDOR ---
 
 /*
